@@ -4,6 +4,7 @@ import sSprite from '../sSprite';
 
 
 let ratio = 1;
+const offset = 1.12;
 
 export default class Background extends sSprite {
 
@@ -17,11 +18,14 @@ export default class Background extends sSprite {
 
   resizeHandler(e) {
 
-    this.width = e.width;
+    const w = e.width * offset;
+    const h = e.height * offset;
+
+    this.width = w;
     this.height = this.width / ratio;
 
-    if(this.height < e.height) {
-      this.height = e.height;
+    if(this.height < h) {
+      this.height = h;
       this.width = this.height * ratio;
     }
 
