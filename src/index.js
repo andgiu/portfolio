@@ -1,12 +1,20 @@
 'use strict';
 import * as PIXI from 'pixi.js';
-import Renderer from './app/renderer/Renderer';
+import {STAGE_WIDTH, STAGE_HEIGHT} from './app/config/Config';
 import RendererStore from './app/stores/RendererStore';
+import Renderer from './app/renderer/Renderer';
+import App from './app/App';
 
 import './sass/style.scss';
 
-const renderer = new Renderer(1280,720,{
-  resolution: window.devicePixelRatio || 1
+let renderer = new Renderer(STAGE_WIDTH,STAGE_HEIGHT,{
+  resolution: window.devicePixelRatio || 1,
+  antialias: true,
+  autoResize: true
 });
 
+let stage = new App(STAGE_WIDTH,STAGE_HEIGHT);
+renderer.addRenderable(stage);
+
 document.getElementById('app').appendChild(renderer.view);
+RendererStore.emitChange();

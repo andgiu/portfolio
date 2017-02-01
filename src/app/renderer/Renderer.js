@@ -15,6 +15,7 @@ export default class Renderer extends PIXI.WebGLRenderer {
     RendererStore.set('stageWidth', args[0]);
     RendererStore.set('stageHeight', args[1]);
     RendererStore.set('stageCenter', new PIXI.Point(args[0] / 2, args[1] / 2));
+    RendererStore.set('renderer', this);
 
     this.resizeHandler();
     this.start();
@@ -27,6 +28,7 @@ export default class Renderer extends PIXI.WebGLRenderer {
   setStore() {
     RendererStore.set('width', this.getWindowSize()[0]);
     RendererStore.set('height', this.getWindowSize()[1]);
+    RendererStore.set('stageCenter', new PIXI.Point(this.getWindowSize()[0] / 2, this.getWindowSize()[1] / 2));
   }
 
   /**
@@ -109,6 +111,7 @@ export default class Renderer extends PIXI.WebGLRenderer {
    * @return {null}
    */
   renderRenderables() {
+
     for (let entry of renderables) {
       this.render(entry);
     }

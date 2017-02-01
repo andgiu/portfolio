@@ -22,7 +22,7 @@
   "homepage": "https://github.com/andgiu/ag-portfolio#readme",
   "dependencies": {
     "gsap": "^1.19.1",
-    "pixi.js": "^4.3.4"
+    "pixi.js": "^4.2.3"
   },
   "devDependencies": {
     "babel-core": "^6.18.2",
