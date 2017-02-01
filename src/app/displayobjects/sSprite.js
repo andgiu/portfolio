@@ -15,9 +15,6 @@ export default class sContainer extends PIXI.Sprite {
   constructor(...args){
     super(...args);
 
-    const center = new PIXI.Point(.5,.5);
-    //this.anchor = center;
-    //this.position = center;
   }
 
 

@@ -1,13 +1,12 @@
 import * as PIXI from 'pixi.js';
-import {STAGE_WIDTH, STAGE_HEIGHT} from './config/Config';
-import RendererStore from './stores/RendererStore';
 import sContainer from './displayobjects/sContainer';
+import Project from './displayobjects/project/Project';
 
 
 export default class App extends sContainer {
 
   constructor(...args) {
-    
+
     super(...args);
     this.init();
 
@@ -15,12 +14,10 @@ export default class App extends sContainer {
 
   init() {
 
-  }
-
-  resizeHandler(resizeOBJ) {
-
-    super.resizeHandler(resizeOBJ);
+    let project = new Project();
+    this.addChild(project);
 
   }
+
 
 }

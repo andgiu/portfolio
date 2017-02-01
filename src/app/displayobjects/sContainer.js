@@ -15,12 +15,10 @@ export default class sContainer extends PIXI.Container {
   constructor(...args){
     super(...args);
     RendererStore.addChangeListener(this.resizeHandler.bind(this));
-
-    this.pivot = new PIXI.Point(.5,.5);
   }
 
   resizeHandler(resizeOBJ) {
-    
+
   }
 
 }
