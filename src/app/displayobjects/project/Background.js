@@ -14,6 +14,7 @@ export default class Background extends sSprite {
     this.anchor = new PIXI.Point(.5,.5);
     ratio = this.width / this.height;
     RendererStore.addChangeListener(this.resizeHandler.bind(this));
+    
   }
 
   resizeHandler(e) {
