@@ -6,11 +6,12 @@ import { RESIZE } from '../actions/ActionTypes';
  * Keeps render variables
  *
  * @data
- * 	width : window width
- * 	height : window height
- * 	stage : stage width and height
- * 	stageCenter : center point of stage
- * 	resolution : display density
+ * 	width:  window width
+ * 	height: window height
+ * 	stage: stage width and height
+ * 	stageCenter: center point of stage
+ * 	resolution: display density
+ *  renderer: renderer reference
  */
 class RendererStore extends EventEmitter {
 

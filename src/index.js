@@ -9,7 +9,7 @@ import './sass/style.scss';
 
 let renderer = new Renderer(STAGE_WIDTH,STAGE_HEIGHT,{
   resolution: window.devicePixelRatio || 1,
-  antialias: false,
+  antialias: true,
   autoResize: true
 });
 

@@ -1,10 +1,11 @@
 import * as PIXI from 'pixi.js';
+import { PT_HALF } from './config/Points';
 import RendererStore from './stores/RendererStore';
 import sContainer from './displayobjects/sContainer';
-import Preloader from './displayobjects/preloader/Preloader';
+import Logo from './displayobjects/preloader/Logo';
 import Project from './displayobjects/project/Project';
 
-let preloader;
+let logo;
 
 export default class App extends sContainer {
 
@@ -14,22 +15,23 @@ export default class App extends sContainer {
     RendererStore.addChangeListener(this.resizeHandler.bind(this));
 
     this.initPreloader();
-    RendererStore.emitChange();
   }
 
   initPreloader() {
 
-    preloader = new Preloader();
-    this.addChild(preloader);
 
-    preloader.scale = new PIXI.Point(.5,.5);
-    preloader.draw();
+    logo = new Logo();
+    this.addChild(logo);
+
+
+    logo.draw();
+    logo.scale = PT_HALF;
 
   }
 
-  resizeHandler(e) {
+  resizeHandler(renderer) {
 
-    if(preloader) preloader.center(e);
+    if(logo) logo.center(renderer);
 
   }
 
