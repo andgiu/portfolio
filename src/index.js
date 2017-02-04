@@ -1,43 +1,59 @@
 "use strict";
+import './sass/style.scss';
 
 import * as PIXI from 'pixi.js';
 import WebFont from 'webfontloader';
-import { FONT_DEFAULT } from './app/config/Fonts';
-import {STAGE_WIDTH, STAGE_HEIGHT} from './app/config/Config';
+
 import RendererStore from './app/stores/RendererStore';
 import Renderer from './app/renderer/Renderer';
 import App from './app/App';
 
-import './sass/style.scss';
 
-// Google Font Loader
+import { Globals } from './app/config/All';
+import AnimationManager from './app/animation/AnimationManager';
+import SoundManager from './app/sound/SoundManager';
+
+window.Global = Globals;
+window.AnimationManager = new AnimationManager();
+window.SoundManager = new SoundManager();
 
 
 
-WebFont.load({
+function initalizeApp() {
 
-    custom: {
-        families: [FONT_DEFAULT],
-        url: ['.src/fonts/fonts.css']
-    },
+  // Google Font Loader
+  WebFont.load({
 
-    active: function() {
+      custom: {
+          families: [Global.font.FONT_DEFAULT],
+          url: ['.src/fonts/fonts.css']
+      },
 
-      sessionStorage.fonts = true;
+      active: function() {
 
-      let renderer = new Renderer(STAGE_WIDTH,STAGE_HEIGHT,{
-        resolution: window.devicePixelRatio || 1,
-        antialias: true,
-        autoResize: true,
-        transparent: false
-      });
+        sessionStorage.fonts = true;
 
-      let stage = new App(STAGE_WIDTH,STAGE_HEIGHT);
-      renderer.addRenderable(stage);
+        let renderer = new Renderer(Global.config.STAGE_WIDTH,Global.config.STAGE_HEIGHT,{
+          resolution: window.devicePixelRatio || 1,
+          antialias: true,
+          autoResize: false,
+          transparent: true
+        });
 
-      document.getElementById('app').appendChild(renderer.view);
-      RendererStore.emitChange();
+        console.log(renderer);
 
-    }
+        let stage = new App(Global.config.STAGE_WIDTH,Global.config.STAGE_HEIGHT);
+        renderer.addRenderable(stage);
 
-});
+        document.getElementById('app').appendChild(renderer.view);
+        RendererStore.emitChange();
+
+      }
+
+  });
+
+}
+
+// define audio
+let introSound = window.SoundManager.add(Global.sound.INTRO.label,Global.sound.INTRO.src);
+introSound.once('load',initalizeApp);

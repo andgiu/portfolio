@@ -27,6 +27,7 @@ module.exports = {
     new webpack.NoErrorsPlugin(),
     new CopyWebpackPlugin([{from:'src/img', to:'img'}]),
     new CopyWebpackPlugin([{from:'src/fonts', to:'fonts'}]),
+    new CopyWebpackPlugin([{from:'src/audio', to:'audio'}]),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
     })
@@ -46,7 +47,7 @@ module.exports = {
         "presets": ["react", "es2015", "stage-0", "react-hmre"]
       }
     }, {
-        test: /\.jpe?g$|\.gif$|\.png$/i,
+        test: /\.jpe?g$|\.gif$|\.png$|\.webm$|\.mp3$/i,
         loader: 'file'
     },{
       test: /\.json?$/,

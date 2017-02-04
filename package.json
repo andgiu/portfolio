@@ -22,6 +22,7 @@
   "homepage": "https://github.com/andgiu/ag-portfolio#readme",
   "dependencies": {
     "gsap": "^1.19.1",
+    "howler": "^2.0.2",
     "lodash": "^4.17.4",
     "pixi-filters": "^1.0.6",
     "pixi.js": "^4.2.3",
