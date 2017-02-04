@@ -1,6 +1,8 @@
 import * as PIXI from 'pixi.js';
 import RendererStore from '../stores/RendererStore';
 import { RESIZE } from '../actions/ActionTypes';
+
+
 /**
  * sContainer
  *
@@ -10,6 +12,7 @@ import { RESIZE } from '../actions/ActionTypes';
  * @exports sContainer
  */
 
+
 export default class sContainer extends PIXI.Container {
 
   constructor(...args){
@@ -17,7 +20,8 @@ export default class sContainer extends PIXI.Container {
     RendererStore.addChangeListener(this.resizeHandler.bind(this));
   }
 
-  resizeHandler(resizeOBJ) {
+
+  resizeHandler(renderer) {
 
   }
 

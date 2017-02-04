@@ -10,8 +10,10 @@ const height = 86;
 export default class Preloader extends sGraphics {
 
   constructor(...args) {
+
     super(...args);
     this.pivot = new PIXI.Point(width / 2, height / 2);
+    this.draw();
   }
 
   draw() {
@@ -33,7 +35,7 @@ export default class Preloader extends sGraphics {
 
     let polygon = new PIXI.Polygon(pointsArray);
 
-    this.beginFill(RED);
+    this.beginFill(LIGHTGRAY);
     this.drawPolygon(polygon);
     this.endFill();
 
@@ -56,7 +58,6 @@ export default class Preloader extends sGraphics {
 
 
   center(renderer) {
-
     super.center(renderer);
   }
 }
