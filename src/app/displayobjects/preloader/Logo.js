@@ -56,8 +56,4 @@ export default class Preloader extends sGraphics {
 
   }
 
-
-  center(renderer) {
-    super.center(renderer);
-  }
 }

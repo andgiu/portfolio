@@ -11,7 +11,7 @@ export default class Project extends sContainer {
 
     this.init();
     RendererStore.addChangeListener(this.resizeHandler.bind(this));
-    RendererStore.emitChange();
+    //RendererStore.emitChange();
   }
 
   init() {
@@ -29,7 +29,7 @@ export default class Project extends sContainer {
     let background = new Background(e.resources['bg'].texture);
     this.addChild(background);
 
-    RendererStore.emitChange();
+    //RendererStore.emitChange();
 
   }
 

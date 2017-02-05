@@ -33,11 +33,13 @@ function initalizeApp() {
 
         sessionStorage.fonts = true;
 
+        let resolution = window.devicePixelRatio || 1;
         let renderer = new Renderer(Global.config.STAGE_WIDTH,Global.config.STAGE_HEIGHT,{
-          resolution: window.devicePixelRatio || 1,
+          resolution: resolution,
           antialias: true,
           autoResize: false,
-          transparent: true
+          transparent: true,
+          roundPixels: resolution == 1
         });
 
         console.log(renderer);
@@ -46,7 +48,6 @@ function initalizeApp() {
         renderer.addRenderable(stage);
 
         document.getElementById('app').appendChild(renderer.view);
-        RendererStore.emitChange();
 
       }
 

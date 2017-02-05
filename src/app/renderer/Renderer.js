@@ -1,5 +1,6 @@
 import * as PIXI from 'pixi.js';
 import RendererStore from '../stores/RendererStore';
+import AnimationStore from '../stores/AnimationStore';
 
 let renderables = new Set();
 
@@ -54,10 +55,10 @@ export default class Renderer extends PIXI.WebGLRenderer {
    */
   animate() {
     this.renderRenderables();
-
+    
     if(this.active) {
       window.requestAnimationFrame(this.animate.bind(this));
-      //AnimationStore.emitChange();
+      AnimationStore.emitChange();
     }
   }
 
