@@ -56,5 +56,5 @@ function initalizeApp() {
 }
 
 // define audio
-let introSound = window.SoundManager.add(Global.sound.INTRO.label,Global.sound.INTRO.src);
+let introSound = window.SoundManager.add(Global.sound.INTRO);
 introSound.once('load',initalizeApp);

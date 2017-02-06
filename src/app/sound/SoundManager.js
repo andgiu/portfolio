@@ -9,18 +9,20 @@ export default class SoundManager {
 
     }
 
-    add(key, soundName, autoplay = false, loop = false, volume = 0.5, sprite: {}) {
+    add(soundOBJ) {
 
-      _sounds[key] = new Howl({
-        src: [_baseAudioPath + soundName + '.mp3', _baseAudioPath + soundName + '.webm'],
+      let soundName = _baseAudioPath + soundOBJ.src;
+
+      _sounds[soundOBJ.key] = new Howl({
+        src: [soundName + '.mp3', soundName + '.webm'],
         format: ['mp3','webm'],
-        sprite: sprite,
-        autoplay: autoplay,
-        loop: loop,
-        volume: volume
+        sprite: soundOBJ.sprite || null,
+        autoplay: soundOBJ.autoplay,
+        loop: soundOBJ.loop,
+        volume: soundOBJ.volume
       });
 
-      return _sounds[key];
+      return _sounds[soundOBJ.key];
 
     }
 

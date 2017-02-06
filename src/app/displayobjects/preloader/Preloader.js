@@ -4,7 +4,7 @@ import ContainerState from '../../statemanager/ContainerState';
 import Logo from './Logo';
 import sText from '../sText';
 import sSprite from '../sSprite';
-
+import { TweenMax, Expo } from 'gsap';
 
 
 let _logo;
@@ -13,6 +13,7 @@ let _headphones;
 let _resources;
 let _dispSprite;
 let _dispFilter;
+let _trianglifyBg;
 
 export default class Preloader extends ContainerState {
 
@@ -29,7 +30,6 @@ export default class Preloader extends ContainerState {
     _logo = new Logo();
     _logo.scale = Global.point.PT_HALF;
     _logo.alpha = 0;
-
 
     // Create Copy
     _headphones_copy = new sText(Global.copy.INTRO_HEADPHONE.toUpperCase(),
@@ -66,7 +66,7 @@ export default class Preloader extends ContainerState {
     super.doTransitionIn();
 
     AnimationManager
-    .fadeIn([_headphones_copy,_headphones],.1,.425,this.onTransitionInComplete.bind(this))
+    .fadeIn([_headphones_copy,_headphones],.12,.435,this.onTransitionInComplete.bind(this))
     .playSound('intro');
 
   }
@@ -77,10 +77,10 @@ export default class Preloader extends ContainerState {
     _dispSprite = new sSprite(_resources['displacement'].texture);
     _dispSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
 
-    _dispFilter = new PIXI.filters.DisplacementFilter(_dispSprite);
+    _dispFilter = new PIXI.filters.NoiseFilter();
+    _dispFilter.noise = .1;
 
-
-    //this.filters = [_dispFilter];
+    this.filters = [_dispFilter];
     AnimationStore.addChangeListener(this.animate.bind(this));
   }
 
@@ -99,7 +99,10 @@ export default class Preloader extends ContainerState {
     let currentDate = new Date();
     let currentTime = currentDate.getTime();
 
-    _dispFilter.scale.set(Math.sin(currentTime * 0.001) * 100);
+    this.filters = [_dispFilter];
+    _dispSprite.x += 10;
+    //_dispFilter.baseTexture.texture.update();
+    //_dispFilter.scale.set(Math.sin(currentTime * 0.001) * 100);
 
   }
 

@@ -4,7 +4,7 @@ let _cache = [];
 export default class AnimationManager {
 
   fadeIn(el, duration = .65, delay = 0, callback) {
-    let _tween = new TweenMax(el,duration,{alpha:1,delay:delay,ease:Expo.easeIn, onComplete:callback});
+    let _tween = new TweenMax(el,duration,{alpha:1,delay:delay,ease:Expo.easeOut, onComplete:callback});
     _cache.push(_tween);
 
     return this;

@@ -1,1 +1,1 @@
-export const INTRO = {label: 'intro', src: 'intro'};
+export const INTRO = {key: 'intro', src: 'intro', volume: .85, autoplay: false, loop: false};
