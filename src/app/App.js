@@ -3,7 +3,6 @@ import { PT_HALF } from './config/Points';
 import RendererStore from './stores/RendererStore';
 import sContainer from './displayobjects/sContainer';
 import Preloader from './displayobjects/preloader/Preloader';
-import Project from './displayobjects/project/Project';
 
 
 let _preloader;

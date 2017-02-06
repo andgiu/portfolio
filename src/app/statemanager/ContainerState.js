@@ -12,13 +12,14 @@ export default class ContainerState extends sContainer {
 
     this._ready = false;
     this._active = false;
-
     _stateManager.add(this);
+
+    this._ready = 3;
     this.componentWillMount();
   }
 
-  onStateChangeHandler() {
-
+  onStateChangeHandler(prop,value,old) {
+    console.log(prop,value,old);
   }
 
   componentWillMount() {

@@ -4,12 +4,14 @@ import ContainerState from '../../statemanager/ContainerState';
 import Logo from './Logo';
 import sText from '../sText';
 import sSprite from '../sSprite';
+import sContainer from '../sContainer';
 import { TweenMax, Expo } from 'gsap';
 
 
 let _logo;
 let _headphones_copy;
 let _headphones;
+let _headphones_holder;
 let _resources;
 let _dispSprite;
 let _dispFilter;
@@ -19,21 +21,24 @@ export default class Preloader extends ContainerState {
 
   constructor(...args) {
     super(...args);
-
   }
 
   componentWillMount() {
 
     super.componentWillMount();
 
+    _headphones_holder = new sContainer;
     // Create Logo
     _logo = new Logo();
     _logo.scale = Global.point.PT_HALF;
     _logo.alpha = 0;
 
     // Create Copy
-    _headphones_copy = new sText(Global.copy.INTRO_HEADPHONE.toUpperCase(),
-    {fontFamily:Global.font.FONT_DEFAULT,fill: Global.color.LIGHTGRAY,fontSize: 22,letterSpacing: 1});
+    _headphones_copy = new sText(
+      Global.copy.INTRO_HEADPHONE.toUpperCase(),
+      {fontFamily:Global.font.FONT_DEFAULT,fill: Global.color.LIGHTGRAY,fontSize: 22,letterSpacing: 1}
+    );
+
     _headphones_copy.alpha = 0;
 
 
@@ -54,7 +59,12 @@ export default class Preloader extends ContainerState {
     _headphones.alpha = 0;
     _headphones.width = _headphones.height = 26;
 
-    this.addChild(_logo,_headphones_copy,_headphones);
+
+    _headphones_holder.addChild(_headphones_copy,_headphones);
+    _headphones_copy.position.set(_headphones.width * 1.35,5);
+    _headphones_holder.pivot = new PIXI.Point(_headphones_holder.width * .5,_headphones_holder.height * .5);
+
+    this.addChild(_logo,_headphones_holder);
     this.componentDidMount();
   }
 
@@ -66,9 +76,11 @@ export default class Preloader extends ContainerState {
     super.doTransitionIn();
 
     AnimationManager
-    .fadeIn([_headphones_copy,_headphones],.12,.435,this.onTransitionInComplete.bind(this))
+    .fadeIn([_headphones_copy,_headphones],.312,.435,this.onTransitionInComplete.bind(this))
     .playSound('intro');
 
+    TweenMax.to(_headphones_holder,1.5,{alpha:0,delay:2.5});
+    TweenMax.to(_headphones_holder.scale,6,{x:1.15,y:1.15,delay:.415});
   }
 
   onTransitionInComplete() {
@@ -80,18 +92,18 @@ export default class Preloader extends ContainerState {
     _dispFilter = new PIXI.filters.NoiseFilter();
     _dispFilter.noise = .1;
 
-    this.filters = [_dispFilter];
+    //this.filters = [_dispFilter];
     AnimationStore.addChangeListener(this.animate.bind(this));
   }
 
   resizeHandler(renderer) {
-
     super.resizeHandler(renderer);
 
-    _logo.center(renderer);
-    _headphones_copy.center(renderer,_headphones.width / 2);
-    _headphones.center(renderer, -((_headphones_copy.width / 2) + (_headphones.width) - _headphones.width / 2), -3);
-
+    //_headphones_holder.pivot.set(renderer.stageCenter);
+    this.position = renderer.stageCenter;
+    //this.position.x = renderer.
+    //_logo.center(renderer);
+    //_headphones_holder.position = renderer.stageCenter;
   }
 
   animate() {
@@ -99,8 +111,8 @@ export default class Preloader extends ContainerState {
     let currentDate = new Date();
     let currentTime = currentDate.getTime();
 
-    this.filters = [_dispFilter];
-    _dispSprite.x += 10;
+    //this.filters = [_dispFilter];
+    //_dispSprite.x += 10;
     //_dispFilter.baseTexture.texture.update();
     //_dispFilter.scale.set(Math.sin(currentTime * 0.001) * 100);
 
